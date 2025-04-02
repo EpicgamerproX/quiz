@@ -8,51 +8,122 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            min-height: 100vh;
+            margin: 0;
             background-color: #f0f0f0;
         }
 
         .quiz-container {
             background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
             max-width: 600px;
-            margin: 20px;
+            width: 90%;
+            transform: translateY(0);
+            opacity: 1;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-container.fade-out {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+
+        .quiz-container.fade-in {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #question {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        #options {
+            display: grid;
+            gap: 15px;
         }
 
         .option {
-            margin: 10px;
-            padding: 10px 20px;
-            border: 2px solid #ddd;
-            border-radius: 5px;
+            padding: 15px 20px;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s ease;
+            background-color: #f9f9f9;
+            text-align: center;
         }
 
         .option:hover {
-            background-color: #f8f8f8;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            background-color: #ffffff;
         }
 
         .correct {
-            background-color: #90EE90 !important;
-            border-color: #006400;
+            background-color: #2ecc71 !important;
+            border-color: #27ae60 !important;
+            color: white;
+            animation: pulse 0.5s ease;
+        }
+
+        .wrong {
+            background-color: #e74c3c !important;
+            border-color: #c0392b !important;
+            color: white;
+            animation: shake 0.4s ease;
         }
 
         #next-btn {
-            margin-top: 20px;
-            padding: 10px 30px;
-            background-color: #4CAF50;
+            margin-top: 25px;
+            padding: 12px 35px;
+            background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.2s ease;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #next-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
 
         #score {
-            margin-top: 20px;
-            font-size: 1.2em;
+            margin-top: 25px;
+            font-size: 1.2rem;
+            text-align: center;
+            color: #34495e;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(8px); }
+            50% { transform: translateX(-8px); }
+            75% { transform: translateX(4px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -145,6 +216,331 @@
     question: "In Ohm's law experiment (V=IR), percentage errors in V and I are 2% and 3%. Error in R is:",
     options: ["1%", "3%", "5%", "6%"],
     correct: 2
+  },
+  {
+    question: "A car accelerates from rest at 2 m/s². What distance does it cover in 5 seconds?",
+    options: ["10 m", "25 m", "50 m", "100 m"],
+    correct: 1
+  },
+  {
+    question: "The slope of a velocity-time graph gives:",
+    options: ["Displacement", "Acceleration", "Speed", "Distance"],
+    correct: 1
+  },
+  {
+    question: "A body moving with 30 m/s applies brakes with retardation 5 m/s². Stopping time is:",
+    options: ["3 s", "6 s", "10 s", "15 s"],
+    correct: 1
+  },
+  {
+    question: "A particle moves x = 2t² - 4t + 3. Acceleration at t=2s is:",
+    options: ["0 m/s²", "2 m/s²", "4 m/s²", "8 m/s²"],
+    correct: 2
+  },
+  {
+    question: "A train crosses a pole in 10s (length=200m). Its speed is:",
+    options: ["10 m/s", "20 m/s", "30 m/s", "40 m/s"],
+    correct: 1
+  },
+  {
+    question: "Which is NOT possible for motion in straight line?",
+    options: ["Negative acceleration with positive velocity", "Zero acceleration with non-zero velocity", "Negative velocity with positive acceleration", "Zero velocity with non-zero acceleration"],
+    correct: 3
+  },
+  {
+    question: "A ball is thrown vertically upward. At maximum height:",
+    options: ["Velocity=0, acceleration≠0", "Velocity≠0, acceleration=0", "Both zero", "Both non-zero"],
+    correct: 0
+  },
+  {
+    question: "A car covers first half at 40 km/h, second half at 60 km/h. Average speed is:",
+    options: ["48 km/h", "50 km/h", "52 km/h", "55 km/h"],
+    correct: 0
+  },
+  {
+    question: "The area under acceleration-time graph gives:",
+    options: ["Displacement", "Velocity", "Change in velocity", "Distance"],
+    correct: 2
+  },
+  {
+    question: "Two trains length 150m each move parallel at 50 m/s and 40 m/s. Time to overtake:",
+    options: ["10 s", "15 s", "20 s", "30 s"],
+    correct: 3
+  },
+  {
+    question: "A stone released from balloon rising at 10 m/s reaches ground in 10s. Height when released:",
+    options: ["400 m", "490 m", "500 m", "600 m"],
+    correct: 0
+  },
+  {
+    question: "A body starting from rest travels 120 m in 8th second. Its acceleration is:",
+    options: ["15 m/s²", "16 m/s²", "17.5 m/s²", "20 m/s²"],
+    correct: 1
+  },
+  {
+    question: "If velocity v = (3t² - 2t) m/s, displacement from t=1s to t=2s is:",
+    options: ["2 m", "3 m", "4 m", "5 m"],
+    correct: 2
+  },
+  {
+    question: "A car moving at 72 km/h decelerates at 5 m/s². Stopping distance is:",
+    options: ["20 m", "40 m", "80 m", "160 m"],
+    correct: 1
+  },
+  {
+    question: "A particle moves with velocity v = √x. Its acceleration is:",
+    options: ["Constant", "Increasing", "Decreasing", "Zero"],
+    correct: 0
+  },
+  {
+    question: "A man walks 3m east then 4m north. Displacement magnitude is:",
+    options: ["5 m", "7 m", "1 m", "12 m"],
+    correct: 0
+  },
+  {
+    question: "The motion equation NOT representing uniformly accelerated motion is:",
+    options: ["x = 2t + 3t²", "v = 5 - 4t", "x = 5t³", "v² = 9 + 4x"],
+    correct: 2
+  },
+  {
+    question: "A driver applies brakes on seeing obstacle 100m ahead (speed=72 km/h, retardation=5 m/s²). Outcome?",
+    options: ["Stops just before obstacle", "Stops 20m before", "Crashes with 20m penetration", "Crashes with 40m penetration"],
+    correct: 2
+  },
+  {
+    question: "A ball thrown upward passes point A at t=2s and t=4s. Height of A is: (g=10 m/s²)",
+    options: ["40 m", "60 m", "80 m", "100 m"],
+    correct: 1
+  },
+  {
+    question: "Two cars A and B approach each other at 40 m/s and 60 m/s. Relative velocity of B w.r.t A is:",
+    options: ["20 m/s", "100 m/s", "-100 m/s", "-20 m/s"],
+    correct: 1
+  },
+              {
+    question: "A particle moves with acceleration a = -kv³ (k > 0). If initial velocity is u, time taken to reduce to u/2 is:",
+    options: ["1/(2ku²)", "ln2/(ku²)", "1/(ku²)", "3/(2ku²)"],
+    correct: 2
+  },
+  {
+    question: "A body starts from rest and accelerates such that a = (2v + 3) m/s². Velocity at t=1s is:",
+    options: ["(3e² - 3)/2 m/s", "e² - 1 m/s", "2(e³ - 1) m/s", "3(e² - 1)/2 m/s"],
+    correct: 0
+  },
+  {
+    question: "Two trains A and B approach each other at speeds v and 2v. When they are d apart, brakes cause deceleration α. Minimum d to avoid collision is:",
+    options: ["9v²/(2α)", "3v²/(α)", "9v²/(4α)", "3v²/(2α)"],
+    correct: 0
+  },
+  {
+    question: "A particle moves along x-axis with velocity v = 3t² - 12t + 9. Total distance traveled from t=0 to t=3s is:",
+    options: ["8 m", "10 m", "11 m", "13 m"],
+    correct: 2
+  },
+  {
+    question: "A stone is dropped into a well. Splash is heard after T seconds. If speed of sound is c, depth of well is: (g=acceleration due to gravity)",
+    options: ["(gT²)/2 - cT", "(g(T - c/g)²)/2", "(g(T - √(2h/c))²)/2", "Requires solving √(2h/g) + h/c = T"],
+    correct: 3
+  },
+  {
+    question: "A car accelerates from rest with a = α√t (α = 2 m/s^(3/2)). Velocity at t=4s is:",
+    options: ["32/3 m/s", "16 m/s", "24 m/s", "12 m/s"],
+    correct: 0
+  },
+  {
+    question: "A particle projected up a smooth inclined plane (θ=30°) with velocity u. Time to return is:",
+    options: ["2u/g", "4u/g", "u/(g sinθ)", "2u/(g sinθ)"],
+    correct: 1
+  },
+  {
+    question: "The velocity-time graph forms a semicircle of radius R. Total distance covered is:",
+    options: ["πR²/2", "πR", "2R", "πR²"],
+    correct: 0
+  },
+  {
+    question: "A rocket moves with v = uln(m₀/m) - gt. Height when fuel finishes (mass ratio=2, g=10, u=2000):",
+    options: ["2000 ln2 - 5t²", "2000(ln2 - 1) - 5t²", "Cannot determine without burn time", "2000 ln2 - 10t"],
+    correct: 2
+  },
+  {
+    question: "A particle moves with x(t) = t³ - 6t² + 9t + 5. Interval when motion is retarding:",
+    options: ["(1,3)", "(2,3)", "(1,2) U (3,∞)", "(0,1) U (2,3)"],
+    correct: 2
+  },
+  {
+    question: "Two particles A and B move along x-axis with positions x_A = 3t² - 2t³ and x_B = t² + 4t. They meet twice at times:",
+    options: ["t=0 & t=2", "t=0 & t=1", "t=1 & t=2", "Never meet twice"],
+    correct: 1
+  },
+  {
+    question: "A police car chases a thief with speed v. When police is d behind, thief decelerates at α. Minimum v to catch:",
+    options: ["√(2αd)", "√(αd)", "2√(αd)", "√(4αd)"],
+    correct: 0
+  },
+  {
+    question: "A particle moves with v = 2/x m/s (x > 0). Time taken to move from x=1 to x=2 is:",
+    options: ["3/4 s", "3/2 s", "3 s", "6 s"],
+    correct: 0
+  },
+  {
+    question: "A ball is thrown vertically with velocity u. Air drag causes deceleration kv² during ascent. Maximum height is:",
+    options: ["(1/(2k)) ln(1 + ku²/g)", "(1/(2k)) ln(1 + 2ku²/g)", "u²/(2g + ku²)", "(1/k) tan⁻¹(u√(k/g))"],
+    correct: 1
+  },
+  {
+    question: "A particle's acceleration a versus position x graph is a parabola symmetric about x=l. Possible velocity graph:",
+    options: ["Velocity maximum at x=l/2", "Velocity zero at x=l", "Velocity never zero", "Velocity minimum at x=l"],
+    correct: 3
+  },
+  {
+    question: "For motion described by x = e⁻ᵗ sin t, acceleration is proportional to:",
+    options: ["x - 2ẋ", "x + 2ẋ", "-x - 2ẋ", "-x + 2ẋ"],
+    correct: 2
+  },
+  {
+    question: "A train of length L accelerates from rest. When front passes pole, speed is v. When end passes, speed is:",
+    options: ["v√2", "v(1 + L/(2v²/a))", "Depends on acceleration", "Cannot determine from given"],
+    correct: 2
+  },
+  {
+    question: "A particle moves in straight line with v² = 4x - x². Maximum speed is:",
+    options: ["1 m/s", "2 m/s", "4 m/s", "√2 m/s"],
+    correct: 1
+  },
+  {
+    question: "Two particles start from rest with accelerations 2t and 3t² respectively. Ratio of velocities at t=1s:",
+    options: ["1:1", "2:3", "1:3", "2:9"],
+    correct: 0
+  },
+  {
+    question: "A car's acceleration is given by a = v/2 for v > 0. Time to go from v=1 m/s to v=2 m/s is:",
+    options: ["ln2", "2 ln2", "(ln2)/2", "1/2"],
+    correct: 1
+  },
+              {
+    question: "A block of mass m is placed on a wedge inclined at θ. The wedge accelerates horizontally with a = g tanθ. The normal force between block and wedge is:",
+    options: ["mg cosθ", "mg / cosθ", "mg", "Zero"],
+    correct: 2
+  },
+  {
+    question: "A chain of linear mass density λ hangs vertically. If y length is on table, the force to pull it at constant speed v is:",
+    options: ["λgy", "λgy + λv²", "λgy + 2λv²", "λv²"],
+    correct: 1
+  },
+  {
+    question: "Two masses m₁=4kg and m₂=6kg connected by a spring rest on frictionless surface. If forces F₁=10N and F₂=20N act on them, spring force is:",
+    options: ["12 N", "14 N", "16 N", "18 N"],
+    correct: 2
+  },
+  {
+    question: "A car takes a banked turn (θ=30°, μ=0.5) at maximum speed without slipping. Ratio of max speed with/without friction is: (radius r)",
+    options: ["√2", "√3", "2", "√(3/2)"],
+    correct: 3
+  },
+  {
+    question: "A block of mass m on rough inclined plane (μ=√3) at θ=60°. Minimum force parallel to plane to prevent slipping is:",
+    options: ["mg/2", "mg", "0", "mg/√3"],
+    correct: 2
+  },
+  {
+    question: "A pulley system has masses m and 2m connected by massless string. The tension when 2m is accelerating downward at g/3 is:",
+    options: ["4mg/3", "2mg/3", "mg/3", "5mg/3"],
+    correct: 0
+  },
+  {
+    question: "A particle moves along f(x) = x² under force F(x). If speed v₀ at x=0, F(x) is proportional to:",
+    options: ["x³", "x²", "x", "Constant"],
+    correct: 0
+  },
+  {
+    question: "A rope of mass m and length L is pulled up with acceleration a. Tension at midpoint is:",
+    options: ["m(g+a)/2", "3m(g+a)/4", "m(g+a)(1 + x/L)", "3m(g+a)/2"],
+    correct: 1
+  },
+  {
+    question: "A block is projected up a rough incline (μ=0.5, θ=37°). Time taken to return is n times ascent time. n is:",
+    options: ["2", "3", "√3", "√5"],
+    correct: 1
+  },
+  {
+    question: "A rod of mass M and length L is falling freely. The normal force at midpoint when θ=45° to vertical is:",
+    options: ["Mg/4", "Mg/2√2", "Zero", "Mg/2"],
+    correct: 2
+  },
+  {
+    question: "Three blocks A(2kg), B(3kg), C(5kg) are pushed with force F=100N. If μ=0.2 between all surfaces, force on C is:",
+    options: ["25 N", "50 N", "75 N", "100 N"],
+    correct: 1
+  },
+  {
+    question: "A particle moves in x-y plane with ẋ = 2y and ẏ = 3x. The trajectory follows:",
+    options: ["F ∝ r", "F ∝ -r", "F = constant", "F ∝ dr/dt"],
+    correct: 0
+  },
+  {
+    question: "A liquid of density ρ fills a tank accelerating upward at a. The pressure at depth h is:",
+    options: ["ρgh", "ρ(g+a)h", "ρ(g-a)h", "ρa h"],
+    correct: 1
+  },
+  {
+    question: "A block on rough horizontal surface is pulled with F=kt. Motion starts at t=5s. μ=0.5, m=2kg. k is:",
+    options: ["2 N/s", "4 N/s", "1 N/s", "0.5 N/s"],
+    correct: 0
+  },
+  {
+    question: "A conical pendulum has length L, mass m, angular speed ω. Tension ratio T_max/T_min is:",
+    options: ["ω²L/g + 1", "√(1 + (ω²L/g)²)", "ω²L/g", "2ω²L/g"],
+    correct: 0
+  },
+  {
+    question: "Two blocks connected by spring (k) on frictionless surface. If suddenly m₁ gets impulse p, max extension is:",
+    options: ["p√(m₂/(k(m₁+m₂)))", "p√(1/(k(m₁+m₂)))", "p²/(2k(m₁+m₂))", "p/(k√(m₁+m₂))"],
+    correct: 1
+  },
+  {
+    question: "A car accelerates on a platform scale. Reading changes from 500kg to 600kg. Acceleration is:",
+    options: ["g/5", "g/4", "g/3", "g/2"],
+    correct: 0
+  },
+  {
+    question: "A chain of length L lies on a rough table (μ=0.5). Maximum length hanging without sliding is:",
+    options: ["L/3", "L/2", "2L/3", "L/4"],
+    correct: 0
+  },
+  {
+    question: "A block slides down a smooth hemisphere from height h=R/2. It leaves surface at angle θ with vertical. cosθ is:",
+    options: ["1/3", "2/3", "1/2", "3/4"],
+    correct: 1
+  },
+  {
+    question: "A force F=αt acts on mass m initially at rest. The velocity when F becomes β times weight is:",
+    options: ["(β²g²m)/(2α)", "(βmg)/(2α)", "(β²g²)/(2αm)", "(βg)²/(2α)"],
+    correct: 0
+  },
+  {
+    question: "A particle moves under F= -kx + cv. Critical damping occurs when c equals:",
+    options: ["2√(mk)", "√(mk)", "2m√k", "k/m"],
+    correct: 0
+  },
+  {
+    question: "Two masses m and 2m are connected over pulley. The acceleration when 2m is immersed in water (buoyant force=mg) is:",
+    options: ["g/3 upward", "g/3 downward", "g/5 upward", "Zero"],
+    correct: 3
+  },
+  {
+    question: "A block on vertical spring oscillates. At maximum compression, apparent weight is:",
+    options: ["Equal to mg", "Twice mg", "Zero", "Variable"],
+    correct: 1
+  },
+  {
+    question: "A rotating drum (ω) has particle at radius r. If μ=1, maximum ω for particle to stay put is:",
+    options: ["√(g/r)", "√(2g/r)", "√(g/(2r))", "√(g/r)/2"],
+    correct: 0
+  },
+  {
+    question: "A rocket ejects mass at rate μ=dm/dt with speed u. Thrust when ascending vertically with speed v is:",
+    options: ["μu", "μ(u+v)", "μ(u-v)", "μu + mg"],
+    correct: 0
   }
 ];
 
@@ -181,6 +577,9 @@
             
             for (let i = 0; i < options.length; i++) {
                 options[i].style.pointerEvents = "none";
+                if (i === optionIndex && optionIndex !== questionObj.correct) {
+                    options[i].classList.add("wrong");
+                }
             }
             
             if (optionIndex === questionObj.correct) {
@@ -196,13 +595,20 @@
         }
 
         function nextQuestion() {
-            currentQuestion++;
-            if (currentQuestion < questions.length) {
-                displayQuestion();
-            } else {
-                alert(`Quiz finished! Final score: ${score}/${questions.length}`);
-                initializeQuiz();
-            }
+            const container = document.querySelector('.quiz-container');
+            container.classList.add('fade-out');
+            
+            setTimeout(() => {
+                container.classList.remove('fade-out');
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    displayQuestion();
+                    container.classList.add('fade-in');
+                } else {
+                    alert(`Quiz finished! Final score: ${score}/${questions.length}`);
+                    initializeQuiz();
+                }
+            }, 300);
         }
 
         // Start the quiz when page loads
