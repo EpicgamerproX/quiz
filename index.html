@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        .option {
+            margin: 10px;
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            background-color: #f8f8f8;
+        }
+
+        .correct {
+            background-color: #90EE90 !important;
+            border-color: #006400;
+        }
+
+        #next-btn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #score {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1 id="question">Question</h1>
+        <div id="options">
+            <div class="option" onclick="selectOption(0)">Option 1</div>
+            <div class="option" onclick="selectOption(1)">Option 2</div>
+            <div class="option" onclick="selectOption(2)">Option 3</div>
+            <div class="option" onclick="selectOption(3)">Option 4</div>
+        </div>
+        <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+        <div id="score">Score: 0</div>
+    </div>
+
+    <script>
+        const questions = [
+          {
+            question: "The dimensional formula for Planck's constant is:",
+            options: ["[ML²T⁻¹]", "[ML²T⁻²]", "[MLT⁻¹]", "[ML²T⁻³]"],
+            correct: 0
+          },
+          {
+            question: "Which instrument measures smallest length with least count 0.01 mm?",
+            options: ["Vernier Calipers", "Screw Gauge", "Meter Scale", "Spherometer"],
+            correct: 1
+          },
+  {
+    question: "The SI unit of luminous intensity is:",
+    options: ["Lumen", "Candela", "Lux", "Watt"],
+    correct: 1
+  },
+  {
+    question: "The number of significant figures in 0.0060700 is:",
+    options: ["3", "4", "5", "6"],
+    correct: 3
+  },
+  {
+    question: "Which pair has same dimensions?",
+    options: ["Stress & Pressure", "Work & Torque", "Angular momentum & Planck's constant", "All of these"],
+    correct: 3
+  },
+  {
+    question: "The error in measurement of radius of sphere is 2%. Error in volume is:",
+    options: ["2%", "4%", "6%", "8%"],
+    correct: 2
+  },
+  {
+    question: "Which is NOT a dimensionless quantity?",
+    options: ["Refractive Index", "Strain", "Relative Density", "Gravitational Constant"],
+    correct: 3
+  },
+  {
+    question: "The least count of a vernier caliper with 1 MSD = 1 mm and 10 VSD divisions is:",
+    options: ["0.01 mm", "0.1 mm", "1 mm", "0.05 mm"],
+    correct: 1
+  },
+  {
+    question: "Dimensional formula for Boltzmann constant is same as:",
+    options: ["Energy", "Pressure", "Entropy", "Specific Heat"],
+    correct: 0
+  },
+  {
+    question: "When 12.6 + 13.235 is calculated, the result should have:",
+    options: ["2 decimal places", "3 decimal places", "1 decimal place", "No decimal places"],
+    correct: 2
+  },
+  {
+    question: "The SI unit of magnetic flux density is:",
+    options: ["Weber", "Tesla", "Henry", "Gauss"],
+    correct: 1
+  },
+  {
+    question: "Parallax error is eliminated by:",
+    options: ["Repeating measurements", "Using proper scale", "Viewing perpendicular to scale", "Using digital instruments"],
+    correct: 2
+  },
+  {
+    question: "If Z = A³/B√C and errors in A,B,C are 1%,2%,3% respectively, error in Z is:",
+    options: ["3.5%", "4.5%", "5.5%", "6.5%"],
+    correct: 2
+  },
+  {
+    question: "The dimensional formula for coefficient of viscosity is:",
+    options: ["[ML⁻¹T⁻¹]", "[MLT⁻¹]", "[ML⁻¹T⁻²]", "[MLT⁻²]"],
+    correct: 0
+  },
+  {
+    question: "In Ohm's law experiment (V=IR), percentage errors in V and I are 2% and 3%. Error in R is:",
+    options: ["1%", "3%", "5%", "6%"],
+    correct: 2
+  }
+];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answerSelected = false;
+
+        function initializeQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            updateScore();
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const questionObj = questions[currentQuestion];
+            document.getElementById("question").textContent = questionObj.question;
+            const options = document.getElementsByClassName("option");
+            
+            for (let i = 0; i < options.length; i++) {
+                options[i].textContent = questionObj.options[i];
+                options[i].classList.remove("correct");
+                options[i].style.pointerEvents = "auto";
+            }
+            answerSelected = false;
+        }
+
+        function selectOption(optionIndex) {
+            if (answerSelected) return;
+            answerSelected = true;
+            
+            const questionObj = questions[currentQuestion];
+            const options = document.getElementsByClassName("option");
+            
+            for (let i = 0; i < options.length; i++) {
+                options[i].style.pointerEvents = "none";
+            }
+            
+            if (optionIndex === questionObj.correct) {
+                score++;
+                updateScore();
+            }
+            
+            options[questionObj.correct].classList.add("correct");
+        }
+
+        function updateScore() {
+            document.getElementById("score").textContent = `Score: ${score}`;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                alert(`Quiz finished! Final score: ${score}/${questions.length}`);
+                initializeQuiz();
+            }
+        }
+
+        // Start the quiz when page loads
+        initializeQuiz();
+    </script>
+</body>
+</html>
