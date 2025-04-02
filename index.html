@@ -555,18 +555,18 @@
             displayQuestion();
         }
 
-        function displayQuestion() {
-            const questionObj = questions[currentQuestion];
-            document.getElementById("question").textContent = questionObj.question;
-            const options = document.getElementsByClassName("option");
-            
-            for (let i = 0; i < options.length; i++) {
-                options[i].textContent = questionObj.options[i];
-                options[i].classList.remove("correct");
-                options[i].style.pointerEvents = "auto";
-            }
-            answerSelected = false;
-        }
+function displayQuestion() {
+    const questionObj = questions[currentQuestion];
+    document.getElementById("question").textContent = questionObj.question;
+    const options = document.getElementsByClassName("option");
+    
+    for (let i = 0; i < options.length; i++) {
+        options[i].textContent = questionObj.options[i];
+        options[i].classList.remove("correct", "wrong"); // Add 'wrong' here
+        options[i].style.pointerEvents = "auto";
+    }
+    answerSelected = false;
+}
 
         function selectOption(optionIndex) {
             if (answerSelected) return;
